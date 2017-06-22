@@ -72,27 +72,24 @@ var detectNetwork = function(cardNumber) {
 
   var network = 'network not found';
 
-  if ( lengthcheck(cardNumber, 14) && prefixcheck(cardNumber, ['38', '39'])){
+
+  if(prefixcheck(cardNumber, ['38', '39']) && lengthcheck(cardNumber, 14)){
     network = 'Diner\'s Club';
-  }else if(lengthcheck(cardNumber, 15) && prefixcheck(cardNumber, ['34', '37'])){
-    network = "American Express";
-//(length === 13 || length === 16 || length === 19) && n1 === 4
-  }else if(lengthcheck(cardNumber, [13, 16, 19]) && cardNumber[0] === '4' && !prefixcheck(cardNumber, ['4903', '4905', '4911', '4936'])){
+  } else if(prefixcheck(cardNumber, ['34', '37']) && lengthcheck(cardNumber, 15)){
+    network = 'American Express';
+  } else if(cardNumber[0] === '4' && !prefixcheck(cardNumber, ['4903', '4905', '4911', '4936']) && lengthcheck(cardNumber, [13, 16, 19])){
     network = 'Visa';
-//(length === 16) && (n1 === 5 && (n2 === 1 || n2 === 2 || n2 === 3 || n2 === 4 || n2 === 5))
-  }else if( lengthcheck(cardNumber, 16) && prefixcheck(cardNumber, ['51', '52', '53', '54', '55'])){
+  } else if(prefixcheck(cardNumber, ['51', '52', '53', '54', '55']) && lengthcheck(cardNumber, 16)){
     network = 'MasterCard';
-//6011, 644-649, or 65, and a length of 16 or 19.
-  }else if( lengthcheck(cardNumber, [16, 19]) && prefixcheck(cardNumber, ['6011', '644', '645', '646', '647', '648', '649', '65']) ){
+  } else if(prefixcheck(cardNumber, ['6011', '644', '645', '646', '647', '648', '649', '65']) && lengthcheck(cardNumber, [16, 19])){
     network = 'Discover';
-    //5018, 5020, 5038, or 6304
-  }else if( (lengthcheck(cardNumber, [12,13,14,15,16,17,18,19]) && prefixcheck(cardNumber, ['5018', '5020', '5038', '6304']))){
+  } else if(prefixcheck(cardNumber, ['5018', '5020', '5038', '6304']) && lengthcheck(cardNumber, [12, 13, 14, 15, 16, 17, 18, 19])){
     network = 'Maestro';
-  }else if( lengthcheck(cardNumber, [16,17,18,19]) && prefixcheck(cardNumber, chinapayranges)){
+  } else if(prefixcheck(cardNumber, chinapayranges) && lengthcheck(cardNumber, [16, 17, 18, 19])){
     network = 'China UnionPay';
-  }else if( (lengthcheck(cardNumber, [16,18,19]) && prefixcheck(cardNumber, ['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759']))){
+  } else if(prefixcheck(cardNumber, ['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759']) && lengthcheck(cardNumber, [16, 18, 19])){
     network = 'Switch';
   }
   return network;
-  // Once you've read this, go ahead and try to implement this function, then return to the console. 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759
 };
+  // Once you've read this, go ahead and try to implement this function, then return to the console. 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759
